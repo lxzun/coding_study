@@ -11,10 +11,7 @@ public:
         }
         
         if (sum.back() != sum.back()/3*3) return false; //3배수 아니면 false
-        
-        vector<int> temp(sum.size(), 0);
-        if (sum == temp) return true;
-        
+      
         if (sum.back() == 0 && count(sum.begin(), sum.end(), 0) >= 3) return true; 
         
         vector<int>::iterator first_iter;
