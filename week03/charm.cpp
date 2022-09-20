@@ -30,3 +30,24 @@ public:
     }
 };
 
+//1684. Count the Number of Consistent Strings
+class Solution {
+public:
+    int countConsistentStrings(string allowed, vector<string>& words) { 
+        int cnt(0);
+        for (int i=0; i<words.size(); i++){
+            bool isCon = true;
+            for (int j=0; j<words[i].size(); j++){ 
+                if (allowed.find(words[i][j]) != string::npos) continue;
+                else {
+                    isCon = false;
+                    break;
+                }
+            }
+            if (isCon) {
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+};
