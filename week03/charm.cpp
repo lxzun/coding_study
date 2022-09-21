@@ -1,5 +1,7 @@
 //1013. Partition Array Into Three Parts With Equal Sum
 
+// Runtime : 54ms (90.76%), Memory : 35.5 MB (5.06%)
+
 class Solution {
 public:
     bool canThreePartsEqualSum(vector<int>& arr) {
@@ -31,6 +33,9 @@ public:
 };
 
 //1684. Count the Number of Consistent Strings
+
+// Runtime : 156ms (15.30%), Memory : 30.1 MB (63.63%)
+
 class Solution {
 public:
     int countConsistentStrings(string allowed, vector<string>& words) { 
@@ -54,6 +59,8 @@ public:
 
 
 //1718. Construct the Lexicographically Largest Valid Sequence
+
+//Time limit exceeded
 class Solution {
 public:
     vector<int> result;
