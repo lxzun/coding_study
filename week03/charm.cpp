@@ -51,3 +51,46 @@ public:
         return cnt;
     }
 };
+
+
+//1718. Construct the Lexicographically Largest Valid Sequence
+class Solution {
+public:
+    vector<int> result;
+    void dfs(vector<int>& res, int n, int idx){
+        if (n == 1) {
+            vector<int>::iterator it;
+            it = find(res.begin(), res.end(), 0);
+            *it = 1;
+            // for (int i=0; i<res.size(); i++){
+            //     cout << res[i];
+            // }
+            // cout << endl;
+            if (result.empty()) result = res;
+            if (!result.empty() && result < res) result = res;
+            *it = 0;
+            return;
+        }
+        if (idx+n >= res.size()) return; //못찾으면
+        
+        //가장 앞자리부터 확인
+        if (res[idx]==0 && res[idx+n] == 0){ //들어갈 수 있는 곳 찾음
+            res[idx] = n;
+            res[idx+n] = n;
+            dfs(res, n-1, 0);
+            res[idx] -= n;
+            res[idx+n] -= n;
+        }
+        dfs(res, n, idx+1); 
+        
+        return;
+    }
+    
+    vector<int> constructDistancedSequence(int n) {
+        vector<int> res(2*n-1, 0);
+        res[0] = n;
+        res[n] = n;
+        dfs(res, n-1, 0);
+        return result;
+    }
+};
