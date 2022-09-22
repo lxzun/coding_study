@@ -60,44 +60,41 @@ public:
 
 //1718. Construct the Lexicographically Largest Valid Sequence
 
-//Time limit exceeded
 class Solution {
 public:
-    vector<int> result;
-    void dfs(vector<int>& res, int n, int idx){
-        if (n == 1) {
-            vector<int>::iterator it;
-            it = find(res.begin(), res.end(), 0);
-            *it = 1;
-            // for (int i=0; i<res.size(); i++){
-            //     cout << res[i];
-            // }
-            // cout << endl;
-            if (result.empty()) result = res;
-            if (!result.empty() && result < res) result = res;
-            *it = 0;
-            return;
-        }
-        if (idx+n >= res.size()) return; //못찾으면
+    bool solve(vector<int>& ans, int ind, vector<bool>& vis, int n){
+        if(ind==ans.size()) return 1;
         
-        //가장 앞자리부터 확인
-        if (res[idx]==0 && res[idx+n] == 0){ //들어갈 수 있는 곳 찾음
-            res[idx] = n;
-            res[idx+n] = n;
-            dfs(res, n-1, 0);
-            res[idx] -= n;
-            res[idx+n] -= n;
-        }
-        dfs(res, n, idx+1); 
+        if(ans[ind]!=0) return solve(ans,ind+1,vis,n);
         
-        return;
+        for(int i = n; i >= 1; i--){
+            if(vis[i]) continue; //본것이면 pass
+            
+            vis[i] = 1;
+            ans[ind] = i;
+            
+            if(i==1) {
+                if(solve(ans,ind+1,vis,n)) return 1;
+            }
+            else if(ind+i<ans.size() && ans[ind+i]==0){
+                    ans[ind+i] = i;
+                    if(solve(ans,ind+1,vis,n)) return 1;
+                    ans[ind+i] = 0;
+            }
+            
+            vis[i] = 0;
+            ans[ind] = 0;
+        }
+        
+        return 0;
     }
     
     vector<int> constructDistancedSequence(int n) {
-        vector<int> res(2*n-1, 0);
-        res[0] = n;
-        res[n] = n;
-        dfs(res, n-1, 0);
-        return result;
+        vector<int> ans(2*n-1,0);
+        vector<bool> vis(n+1,0);
+        
+        solve(ans,0,vis,n);
+        
+        return ans;
     }
 };
