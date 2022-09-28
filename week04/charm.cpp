@@ -48,7 +48,7 @@ public:
         dfs(node->right, cnt, x, isFind);
     }
     
-    bool btreeGameWinningMove(TreeNode* root, int n, int x) { //같은 깊이의 다른 노드 선택, 무조건 왼쪽으로
+    bool btreeGameWinningMove(TreeNode* root, int n, int x) {
         int cnt = 0;
         dfs(root, cnt, x, false);
         int m_cnt = max({l_cnt, r_cnt, (n-(l_cnt+r_cnt+1))});
