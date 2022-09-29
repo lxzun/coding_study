@@ -25,5 +25,5 @@ class Solution(object):
         leftCnt, rightCnt = 0, 0
 
         x_cnt = count(root, x)
-        y_cnt = n - x_cnt - 1
+        y_cnt = n - leftCnt - rightCnt - 1
         return (y_cnt) > n / 2
