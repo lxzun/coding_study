@@ -24,6 +24,6 @@ class Solution(object):
         
         leftCnt, rightCnt = 0, 0
 
-        x_cnt = count(root, x)
-        y_cnt = n - leftCnt - rightCnt - 1
-        return (y_cnt) > n / 2
+        total = count(root, x)
+        y_cnt = total - leftCnt - rightCnt - 1
+        return max(leftCnt, rightCnt, y_cnt) > n / 2
